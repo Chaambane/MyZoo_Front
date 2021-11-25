@@ -1,5 +1,6 @@
 import React from 'react';
 import LogoMyZoo from '../../../Assets/images/logo.png';
+import { NavLink } from 'react-router-dom';
 
 const navbar = (props) => (
     <header>
@@ -12,9 +13,12 @@ const navbar = (props) => (
                 <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul className="navbar-nav me-auto mb-2 mb-lg-0 fs-5 fw-bold">
                     <li className="nav-item">
-                        <a className="nav-link" href="top">Accueil</a>
+                        <NavLink className="nav-link" exact to="/">Accueil</NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link" exact to="/contact">Contact</NavLink>
                     </li>
                 </ul>
                 </div>
