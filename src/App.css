@@ -6,7 +6,16 @@
     font-family: 'CairoBold';
     src: url('./Fonts/Cairo/Cairo-Bold.ttf');
   }
+  @font-face {
+    font-family: 'IndieFlower';
+    src: url('./Fonts/Indie_Flower/IndieFlower-Regular.ttf');
+  }
 
   body{
     font-family: 'CairoRegular', sans-serif;
+  }
+
+  /*HOME*/
+  h1{
+    font-family: 'Indie Flower', cursive;
   }
