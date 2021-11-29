@@ -36,6 +36,11 @@
   .youtFooter{
     height: 25px;
   }
+  .mtFooter{
+    font-weight: bold;
+    text-decoration: none;
+    color: #fff;
+  }
 
   @media only screen and (max-width:720px) {
       /*HOME*/
