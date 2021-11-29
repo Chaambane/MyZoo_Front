@@ -4,6 +4,7 @@ import { Switch, Route} from 'react-router-dom';
 import Home from './Home/Home';
 import Error404 from '../../Components/UI/Error/Error404/Error404';
 import Footer from '../../Components/UI/Footer/Footer';
+import Parc from '../Parc/Parc';
 class Main extends Component {
     render() {
         return (
@@ -13,6 +14,7 @@ class Main extends Component {
                     <main>
                         <Switch>
                             <Route path="/" exact render={() => <Home/> }/>
+                            <Route path="/parc" exact render={() => <Parc/> }/>
                             <Route path="/contact" exact render={() => <h1>Contact</h1>}/>
                             <Route path="*" exact component={Error404}/>
                         </Switch>
