@@ -11,7 +11,10 @@ const animal = (props) => (
             <div>
                 <img src={props.image} className="img-fluid h-100" width="80px" alt={props.nom} />
             </div>
-            <h3 className="card-text p-2">Famille: <Button btnClr="btn-secondary">{props.famille.libelleFamille.toUpperCase()}</Button></h3>
+            <h3 className="card-text p-2">Famille: <Button 
+                    clic={() => props.filterFamily(props.famille.idFamille)} 
+                    btnClr="btn-secondary"
+                >{props.famille.libelleFamille.toUpperCase()}</Button></h3>
             <p className="card-text p-2">{props.famille.descriptionFamille}</p>
             {props.continents.map(continent => {
                 let colorBtn = "";
@@ -29,7 +32,11 @@ const animal = (props) => (
                     default: return null;
                 }
                 return(
-                    <Button btnClr={colorBtn} cssM="me-1" key={continent.idContinent}>{continent.libelleContinent}</Button>
+                    <Button btnClr={colorBtn} 
+                        cssM="me-1" 
+                        key={continent.idContinent}
+                        clic={() => props.filterContinent(continent.idContinent)} 
+                    >{continent.libelleContinent}</Button>
                 )
             })}
         </div>

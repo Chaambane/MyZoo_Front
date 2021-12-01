@@ -20,6 +20,14 @@ class Parc extends Component {
             })
     }
 
+    handleFamilySelect = (family) => {
+        console.log(family);
+    }
+
+    handleContinentSelect = (continent) => {
+        console.log(continent);
+    }
+
     render() {
         return(
             <>
@@ -32,7 +40,10 @@ class Parc extends Component {
                                 this.state.DataParc.map(animal => {
                                     return(
                                         <div className="col-12 col-md-6 mt-2 mb-2" key={animal.id}>
-                                            <Animal {...animal}/>
+                                            <Animal {...animal}
+                                                filterFamily = {this.handleFamilySelect}
+                                                filterContinent = {this.handleContinentSelect}
+                                            />
                                         </div>
                                     )
                                 })
