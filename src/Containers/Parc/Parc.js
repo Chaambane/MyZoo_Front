@@ -9,11 +9,30 @@ class Parc extends Component {
     state= {
         DataParc: null,
         filterFamille: null,
-        filterContinent: null
+        filterContinent: null,
+        listeFamilles: null,
+        listeContinents: null
     }
 
     componentDidMount = () => {
         this.loadData();
+        axios.get(`http://localhost:8090/SERVEUR_ANIMAUX/front/familles`)
+        .then(response => {
+            // console.log(response);
+            this.setState({listeFamilles: Object.values(response.data)})
+        }) 
+        .catch(error => {
+            console.log(error);
+        })
+
+        axios.get(`http://localhost:8090/SERVEUR_ANIMAUX/front/continents`)
+        .then(response => {
+            // console.log(response);
+            this.setState({listeContinents: Object.values(response.data)})
+        }) 
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     componentDidUpdate = (oldProps, oldState) => {
@@ -38,13 +57,15 @@ class Parc extends Component {
     // Filtre sur la famille des animaux
     handleFamilySelect = (family) => {
         // console.log(family);
-        this.setState({filterFamille: family});
+        if(family === "-1") this.handleResetFilterFamily();
+        else this.setState({filterFamille: family});
     }
 
     // Filtre sur les continents ou ces animaux sont présent
     handleContinentSelect = (continent) => {
         // console.log(continent);
-        this.setState({filterContinent: continent});
+        if(continent === "-1") this.handleResetFilterContinent();
+        else this.setState({filterContinent: continent});
     }
 
     // Reset le filtre famille
@@ -63,9 +84,35 @@ class Parc extends Component {
             <>
                 <Title bgClr="bg-success">Animaux dans le parc</Title>
                 <div className="container">
-                    {
-                        (this.state.filterFamille || this.state.filterContinent) && <span className="fw-bold">Filtres : </span>
-                    }
+                    <span className="fw-bold">Filtres : </span>
+
+                    <select className="me-2" onChange={(e) => this.handleFamilySelect(e.target.value)}>
+                        <option value="-1" selected={this.state.filterFamille === null && "selected"}>Familles</option>
+                        {
+                            this.state.listeFamilles && this.state.listeFamilles.map(famille => {
+                                return(
+                                    <option 
+                                        value={famille.famille_id}
+                                        selected={this.state.filterFamille === famille.famille_id && "selected"}
+                                    >{famille.famille_libelle}</option>
+                                )
+                            })
+                        }
+                    </select>
+
+                    <select onChange={(e) => this.handleContinentSelect(e.target.value)}>
+                        <option value="-1" selected={this.state.filterContinent === null && "selected"}>Continents</option>
+                        {
+                            this.state.listeContinents && this.state.listeContinents.map(continent => {
+                                return(
+                                    <option 
+                                        value={continent.continent_id}
+                                        selected={this.state.filterContinent === continent.continent_id && "selected"}
+                                    >{continent.continent_libelle}</option>
+                                )
+                            })
+                        }
+                    </select>
                     {
                         this.state.filterFamille &&
                         <Button 
