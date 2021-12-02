@@ -6,26 +6,42 @@ import Animal from './Animal/Animal';
 
 class Parc extends Component {
     state= {
-        DataParc: null
+        DataParc: null,
+        filterFamille: null,
+        filterContinent: null
     }
 
     componentDidMount = () => {
-        axios.get('http://localhost:8090/SERVEUR_ANIMAUX/front/animaux')
-            .then(response => {
-                console.log(response.data);
-                this.setState({DataParc: Object.values(response.data)})
-            })
-            .catch(error => {
-                console.log(error);
-            })
+        this.loadData();
+    }
+
+    componentDidUpdate = (oldProps, oldState) => {
+        if(oldState.filterFamille !== this.state.filterFamille || oldState.filterContinent !== this.state.filterContinent) {
+            this.loadData();
+        }
+    }
+
+    loadData = () => { // Récupère les données dans l'API PHP
+        let family = this.state.filterFamille ? this.state.filterFamille : "-1";
+        let continent = this.state.filterContinent ? this.state.filterContinent : "-1";
+        axios.get(`http://localhost:8090/SERVEUR_ANIMAUX/front/animaux/${family}/${continent}`)
+        .then(response => {
+            console.log(response.data);
+            this.setState({DataParc: Object.values(response.data)})
+        }) 
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     handleFamilySelect = (family) => {
         console.log(family);
+        this.setState({filterFamille: family});
     }
 
     handleContinentSelect = (continent) => {
         console.log(continent);
+        this.setState({filterContinent: continent});
     }
 
     render() {
