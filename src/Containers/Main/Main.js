@@ -5,6 +5,7 @@ import Home from './Home/Home';
 import Error404 from '../../Components/UI/Error/Error404/Error404';
 import Footer from '../../Components/UI/Footer/Footer';
 import Parc from '../Parc/Parc';
+import Contact from '../Contact/Contact';
 class Main extends Component {
     render() {
         return (
@@ -15,7 +16,7 @@ class Main extends Component {
                         <Switch>
                             <Route path="/" exact render={() => <Home/> }/>
                             <Route path="/parc" exact render={() => <Parc/> }/>
-                            <Route path="/contact" exact render={() => <h1>Contact</h1>}/>
+                            <Route path="/contact" exact render={() => <Contact/>}/>
                             <Route path="*" exact component={Error404}/>
                         </Switch>
                     </main>

@@ -15,6 +15,7 @@ class Parc extends Component {
     }
 
     componentDidMount = () => {
+        document.title = "Parc myZoo"
         this.loadData();
         axios.get(`http://localhost:8090/SERVEUR_ANIMAUX/front/familles`)
         .then(response => {
