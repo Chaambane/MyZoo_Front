@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from '../../../Components/UI/Button/Button';
 import { withFormik } from 'formik';
 import * as Yup from 'yup';
 
@@ -50,10 +49,12 @@ const form = (props) => (
                 <span className="text-danger fw-bold">{props.errors.message}</span>
             }
         </div>
-        <div className="d-grid gap-2">
-            <Button btnClr="btn-info btn-lg"
-                clic={props.handleSubmit}
-            >Envoyer</Button>
+        <div className="d-grid gap-2 mb-2">
+            <button 
+                type="button"
+                className="btn-info btn-lg"
+                onClick={props.handleSubmit}
+            >Envoyer</button>
         </div>
     </>
 );
@@ -78,7 +79,12 @@ export default withFormik ({
 
 
     }),
-    handleSubmit: (values) => {
-        alert("Message Envoyé");
+    handleSubmit: (values, {props}) => {
+        const message = {
+            name: values.name,
+            email: values.email,
+            content: values.message
+        }
+        props.sendMail(message)
     }
 })(form);

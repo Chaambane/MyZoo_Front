@@ -1,10 +1,21 @@
 import React, {Component} from 'react';
 import Title from '../../Components/UI/Title/Title';
 import Form from './Form/Form';
+import axios from 'axios';
 
 class Contact extends Component {
     componentDidMount = () => {
         document.title = "Page de contact"
+    }
+
+    handleSendMail = (message) => {
+        axios.post('http://localhost:8090/SERVEUR_ANIMAUX/front/postMessage', message)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                console.log(error);
+            })
     }
 
     render() {
@@ -20,7 +31,7 @@ class Contact extends Component {
                         <div className="fs-1">Vous préférez nous écrire ?</div>
                         XXXXXXXXXXXXXXXX
                     </div>
-                    <Form/>
+                    <Form sendMail = {this.handleSendMail}/>
                 </div>
             </>
         )
